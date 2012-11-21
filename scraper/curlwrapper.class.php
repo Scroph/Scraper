@@ -6,6 +6,7 @@ class cURLWrapper
 	private $_url;
 	private $_ch;
 	private $_opts;
+	private $_src = '';
 
 	public function __construct($url)
 	{
@@ -37,20 +38,20 @@ class cURLWrapper
 
 	public function retrieve_source($write_to = NULL)
 	{
-		$result = curl_exec($this->_ch);
-		if($result === FALSE)
+		$this->_src = curl_exec($this->_ch);
+		if($this->_src === FALSE)
 		{
 			throw new Exceptions\cURLException(curl_error($this->_ch));
 		}
 
 		if($write_to !== NULL)
 		{
-			if(file_put_contents($write_to, $result) === FALSE)
+			if(file_put_contents($write_to, $this->_src) === FALSE)
 			{
 				throw new Exceptions\IOException('Failed to write to : '.$write_to);
 			}
 		}
-		return $result;
+		return $this->_src;
 	}
 
 	public function retrieve_details($type = NULL)
@@ -62,6 +63,11 @@ class cURLWrapper
 	public function close()
 	{
 		curl_close($this->_ch);
+	}
+
+	public function __toString()
+	{
+		return $this->_src;
 	}
 
 	public function __destruct()
