@@ -66,6 +66,6 @@ class cURLWrapper
 
 	public function __destruct()
 	{
-		$this->close();
+		is_resource($this->_ch) && $this->close();
 	}
 }
