@@ -7,7 +7,7 @@ class XPathWrapper
 	private $_dom;
 	private $_xpath;
 
-	public function __construct($html, $encoding = '')
+	public function __construct($html, $encoding = 'utf-8')
 	{
 		$this->_html = $html;
 
@@ -21,7 +21,7 @@ class XPathWrapper
 		$this->_xpath = new \DOMXPath($this->_dom);
 	}
 
-	public function query($query, DOMNode $node = NULL)
+	public function query($query, \DOMNode $node = NULL)
 	{
 		return $this->_xpath->query($query, $node);
 	}
