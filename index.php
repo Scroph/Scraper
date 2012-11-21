@@ -9,7 +9,7 @@ $story_query = '//div[@class="expando"]/form/div[@class="usertext-body"]';
 $next_query = '//p[@class="nextprev"]/a[@rel="nofollow next"]/@href';
 $pages = 0;
 
-while(++$pages < 2)
+while(++$pages < 5)
 {
 	$ch = new cURLWrapper($url);
 	$xpath = new XPathWrapper($ch->retrieve_source());
